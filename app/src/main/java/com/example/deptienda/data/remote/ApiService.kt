@@ -5,7 +5,7 @@ import retrofit2.http.GET
 
 //Interface que define los endpoints HTTP
 interface ApiService{
-    //Define solicitud get al endpoint /posts
-    @GET("/posts")
+    //Define solicitud get al endpoint posts
+    @GET("posts")
     suspend fun getPosts(): List<Post>
 }

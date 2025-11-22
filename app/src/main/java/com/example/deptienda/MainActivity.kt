@@ -11,8 +11,8 @@ import com.example.deptienda.ui.navigation.AppNavHost
 import com.example.deptienda.ui.theme.DepTheme
 //Imports de actividad 3.1.2
 import androidx.core.view.WindowCompat
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.deptienda.ui.navigation.PostScreen
+//import androidx.lifecycle.viewmodel.compose.viewModel
+//import com.example.deptienda.ui.navigation.PostScreen
 //import com.example.deptienda.ui.theme.ApiRestTheme
 
 class MainActivity : ComponentActivity() {
