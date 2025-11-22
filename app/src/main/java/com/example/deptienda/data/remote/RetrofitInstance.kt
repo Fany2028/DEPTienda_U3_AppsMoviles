@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitInstance{
     val api: ApiService by lazy {
         Retrofit.Builder()
-            .baseUrl("https://jsonplaceholder.typicode.com") //Cambiar por la url de la api
+            .baseUrl("https://jsonplaceholder.typicode.com/") //Cambiar por la url de la api
             .addConverterFactory(GsonConverterFactory.create()) //Converter JSON
             .build()
             .create(ApiService::class.java) //Implementa interfaz ApiService
