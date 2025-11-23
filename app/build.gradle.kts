@@ -6,12 +6,12 @@
 
 android {
     namespace = "com.example.deptienda"
-    compileSdk = 34
+    compileSdk = 35 //Con 34 no ubica los Test
 
     defaultConfig {
         applicationId = "com.example.deptienda"
         minSdk = 26
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -84,6 +84,7 @@ dependencies {
     implementation("androidx.room:room-ktx:2.6.0")
     implementation(libs.play.services.games)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.ui.test.junit4)
     kapt("androidx.room:room-compiler:2.6.0")
 
     //Imlplementación gson y gson converter, según 3.1.2
@@ -91,8 +92,9 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
     implementation("com.squareup.retrofit2:converter-gson:2.11.0")
 
-    //Implementación de corrutinas:
+    //Implementación y Test de corrutinas:
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
@@ -101,4 +103,13 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    //Mockk
+    testImplementation("io.mockk:mockk:1.13.8")
+
+    // Testing
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("androidx.test:core:1.5.0")
+    testImplementation("androidx.test:runner:1.5.2")
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
 }

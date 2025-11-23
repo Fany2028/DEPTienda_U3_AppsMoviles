@@ -8,4 +8,8 @@ interface ApiService{
     //Define solicitud get al endpoint posts
     @GET("posts")
     suspend fun getPosts(): List<Post>
+
+    companion object {
+        var posts: List<Post> = TODO("initialize me")
+    }
 }

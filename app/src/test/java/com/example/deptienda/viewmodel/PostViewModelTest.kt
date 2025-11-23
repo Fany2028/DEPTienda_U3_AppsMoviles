@@ -1,29 +1,42 @@
 package com.example.deptienda.viewmodel
 
 import com.example.deptienda.data.models.Post
-import io.kotest.core.spec.style.StringSpec
-import io.kotest.matchers.shouldBe
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import com.example.deptienda.data.repository.PostRepository
+import io.mockk.coEvery
+import io.mockk.mockk
+import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
+import org.junit.Test
+import org.junit.Assert.*
 
-@OptIn(ExperimentalCoroutinesApi::class)
-class PostViewModelTest : StringSpec({
-    "postList debe contener los datos esperados después de fetchPosts()" {
-        runTest {
-            val fakePosts = listOf(
-                Post(userId = 1, id = 1, title = "Títulillo 1", body = "Contenido 1"),
-                Post(userId = 2, id = 2, title = "Títulillo 2", body = "Contenido 2")
-            )
+class PostViewModelTest {
 
-            val testViewModel = object : PostViewModel() {
-                override fun fetchPosts() {
-                    _postList.value = fakePosts
-                }
-            }
+    @Test
+    fun `fetchPosts should update postList`() = runTest {
+        // Arrange
+        val expectedPosts = listOf(
+            Post(1, 1, "Titulillo 1", "Cuerpo 1"),
+            Post(2, 2, "Titulillo 2", "Cuerpo 2")
+        )
 
-            testViewModel.fetchPosts()
+        val mockRepository = mockk<PostRepository>()
+        coEvery { mockRepository.getPosts() } returns expectedPosts
 
-            testViewModel.postList.value shouldBe fakePosts //shouldContainExactly daba error (¿?)
-        }
+        // Act
+        val viewModel = PostViewModel(mockRepository)
+        viewModel.fetchPosts(this)
+
+        advanceUntilIdle()
+
+        // Assert
+        assertEquals(expectedPosts, viewModel.postList.value)
     }
-})
+
+    @Test
+    fun `postList should be empty initially`() = runTest {
+        val mockRepository = mockk<PostRepository>()
+        val viewModel = PostViewModel(mockRepository)
+
+        assertTrue(viewModel.postList.value.isEmpty())
+    }
+}
